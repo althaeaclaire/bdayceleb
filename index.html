@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0, user-scalable=no">
+  <title>✨ A Classy Birthday ✨</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f0e8 0%, #e8dcc8 30%, #d4c3a3 70%, #f0e5d2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.06) 1px, transparent 1px),
+        radial-gradient(circle at 40% 60%, rgba(180, 140, 70, 0.07) 2px, transparent 2px);
+      background-size: 60px 60px, 80px 80px, 100px 100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      max-width: 700px;
+      width: 100%;
+      background: linear-gradient(145deg, #fffdf7 0%, #faf5eb 100%);
+      border-radius: 3rem;
+      box-shadow: 
+        0 25px 50px -12px rgba(80, 50, 20, 0.15),
+        0 0 0 1px rgba(200, 170, 110, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      z-index: 10;
+      border: 1px solid rgba(180, 145, 90, 0.25);
+    }
+
+    .ornament-top {
+      font-size: 2.5rem;
+      letter-spacing: 8px;
+      color: #c9a85b;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #3e2e1f;
+      margin-bottom: 0.25rem;
+      letter-spacing: 2px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #8b765a;
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    .step-indicator {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: rgba(220, 190, 120, 0.08);
+      display: inline-block;
+      padding: 0.4rem 1.8rem;
+      border: 1px solid #c9a85b;
+      color: #6b5a45;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .question-box {
+      background: transparent;
+      padding: 0.5rem 0.5rem 1rem;
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    .question-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #4a3828;
+      margin-bottom: 1.8rem;
+      font-weight: 600;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 0.5rem;
+      position: relative;
+    }
+
+    .btn {
+      border: none;
+      background: rgba(240, 225, 200, 0.5);
+      padding: 0.9rem 2.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #3e2e1f;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #c9a85b;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      min-width: 120px;
+    }
+
+    .btn:hover {
+      background: rgba(200, 165, 90, 0.2);
+      border-color: #b3924b;
+      box-shadow: 0 8px 20px rgba(140, 100, 40, 0.12);
+      transform: translateY(-2px);
+    }
+
+    #yesButton {
+      background: #d4b87a;
+      border: 1px solid #b3924b;
+      color: #2c2416;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(170, 130, 50, 0.2);
+    }
+
+    #yesButton:hover {
+      background: #dfc38c;
+    }
+
+    #noButton {
+      background: rgba(230, 215, 190, 0.7);
+      border: 1px solid #bfaa80;
+      color: #5c4a32;
+      transition: all 0.08s linear;
+      position: relative;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin: 1.8rem 0 0.8rem;
+    }
+
+    .option-item {
+      background: #faf6ef;
+      border: 1px solid #d4bc8c;
+      padding: 1.1rem 0.8rem;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #4e3c2c;
+      transition: all 0.25s;
+      letter-spacing: 0.5px;
+      text-align: center;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .option-item.selected {
+      background: #dac29b;
+      border-color: #b3924b;
+      color: #2b1f12;
+      font-weight: 700;
+      box-shadow: 0 10px 20px -10px rgba(150, 110, 40, 0.3);
+    }
+
+    .color-circle {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .custom-color-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+    }
+    #customColorInput {
+      width: 200px;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid #d4bc8c;
+      background: #fffdf7;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 2rem;
+      outline: none;
+      color: #3e2e1f;
+      text-align: center;
+    }
+
+    .location-input-area {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.8rem;
+    }
+    #locationTextInput {
+      width: 280px;
+      padding: 1rem 1.5rem;
+      border: 1px solid #d4bc8c;
+      background: #fffdf7;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      border-radius: 2rem;
+      outline: none;
+      color: #3e2e1f;
+      text-align: center;
+    }
+
+    .date-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    input[type="date"] {
+      padding: 0.9rem 2rem;
+      border: 1px solid #d4bc8c;
+      background: #fdfaf5;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+      outline: none;
+      cursor: pointer;
+      border-radius: 2rem;
+    }
+
+    .next-btn {
+      background: rgba(220, 185, 110, 0.15);
+      color: #3e2e1f;
+      border: 1px solid #b3924b;
+      padding: 0.9rem 3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+
+    .next-btn:hover:not(:disabled) {
+      background: rgba(200, 155, 70, 0.3);
+      border-color: #a5833c;
+    }
+
+    .next-btn:disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      border-color: #ccc0aa;
+    }
+
+    .final-message {
+      background: transparent;
+      padding: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .top-notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff7e8;
+      border: 1px solid #c9a85b;
+      color: #3e2e1f;
+      padding: 1rem 2.5rem;
+      border-radius: 3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      z-index: 2000;
+      animation: fadeSlideDown 0.3s ease;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 248, 235, 0.9);
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #c9a85b;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<form id="hiddenForm" action="https://formspree.io/f/xaqraagd" method="POST" style="display: none;">
+  <input type="text" name="food" id="formFood">
+  <input type="text" name="drink" id="formDrink">
+  <input type="text" name="color" id="formColor">
+  <input type="text" name="date" id="formDate">
+  <input type="text" name="location" id="formLocation">
+  <input type="text" name="timestamp" id="formTimestamp">
+  <input type="text" name="subject" value="🎂 Birthday Celebration Answers">
+</form>
+
+<div class="card" id="appCard">
+  <div class="ornament-top">✦ ✦ ✦</div>
+  <h1>Birthday Celebration</h1>
+  <div class="subtitle" id="dynamicSubtitle">for my love</div>
+  <div class="step-indicator" id="stepDisplay">Step 1 / 5</div>
+
+  <!-- Step 0: Yes/No -->
+  <div id="step0" class="question-box">
+    <p class="question-text">Will you celebrate with me?</p>
+    <div class="btn-group">
+      <button class="btn" id="yesButton" type="button">Yes</button>
+      <button class="btn" id="noButton" type="button">No</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Food (Pizza, Jollibee Chicken Joy, Street Food, Ice Cream) -->
+  <div id="step1" class="question-box hidden">
+    <p class="question-text">Choose your favorite food</p>
+    <div class="options-grid" id="foodOptions">
+      <div class="option-item" data-food="Pizza">🍕 Pizza</div>
+      <div class="option-item" data-food="Jollibee Chicken Joy">🍗 Jollibee Chicken Joy</div>
+      <div class="option-item" data-food="Street Food">🍢 Street Food</div>
+      <div class="option-item" data-food="Ice Cream">🍦 Ice Cream</div>
+    </div>
+  </div>
+
+  <!-- Step 2: Drink (Milk Tea, C2, Iced Coffee, Shake) -->
+  <div id="step2" class="question-box hidden">
+    <p class="question-text">Select your drink</p>
+    <div class="options-grid" id="drinkOptions">
+      <div class="option-item" data-drink="Milk Tea">🧋 Milk Tea</div>
+      <div class="option-item" data-drink="C2">🍵 C2</div>
+      <div class="option-item" data-drink="Iced Coffee">☕ Iced Coffee</div>
+      <div class="option-item" data-drink="Shake">🥤 Shake</div>
+    </div>
+  </div>
+
+  <!-- Step 3: Favorite Color (12 + Others) -->
+  <div id="step3" class="question-box hidden">
+    <p class="question-text">Pick your favorite color</p>
+    <div class="options-grid" id="colorOptions" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="option-item" data-color="Rose Gold"><span class="color-circle" style="background:#e0bfb8;"></span>Rose Gold</div>
+      <div class="option-item" data-color="Sapphire"><span class="color-circle" style="background:#0f52ba;"></span>Sapphire</div>
+      <div class="option-item" data-color="Emerald"><span class="color-circle" style="background:#2e5a3b;"></span>Emerald</div>
+      <div class="option-item" data-color="Burgundy"><span class="color-circle" style="background:#6e2c2c;"></span>Burgundy</div>
+      <div class="option-item" data-color="Blush Pink"><span class="color-circle" style="background:#f0c0c0;"></span>Blush Pink</div>
+      <div class="option-item" data-color="Lavender"><span class="color-circle" style="background:#b8a0d0;"></span>Lavender</div>
+      <div class="option-item" data-color="Charcoal"><span class="color-circle" style="background:#4a4a4a;"></span>Charcoal</div>
+      <div class="option-item" data-color="Teal"><span class="color-circle" style="background:#2f7a7a;"></span>Teal</div>
+      <div class="option-item" data-color="Coral"><span class="color-circle" style="background:#f08060;"></span>Coral</div>
+      <div class="option-item" data-color="Ivory"><span class="color-circle" style="background:#f5f0e0;"></span>Ivory</div>
+      <div class="option-item" data-color="Midnight Blue"><span class="color-circle" style="background:#1a2b4c;"></span>Midnight</div>
+      <div class="option-item" data-color="Gold"><span class="color-circle" style="background:#d4af37;"></span>Gold</div>
+      <div class="option-item" data-color="__others__"><span class="color-circle" style="background:conic-gradient(#ccc,#aaa,#ccc);"></span>Others ✦</div>
+    </div>
+    <div class="custom-color-row hidden" id="customColorContainer">
+      <input type="text" id="customColorInput" placeholder="Type your color..." autocomplete="off">
+    </div>
+    <div id="colorConfirmMessage" style="margin-top:1.2rem; font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:#8b765a; min-height:2rem;"></div>
+  </div>
+
+  <!-- Step 4: Date & Location (blank space for location) -->
+  <div id="step4" class="question-box hidden">
+    <p class="question-text">Date & your dream place</p>
+    <div class="date-row">
+      <input type="date" id="celebrationDate">
+    </div>
+    <div class="location-input-area">
+      <input type="text" id="locationTextInput" placeholder="Where do you want to celebrate?" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Final step -->
+  <div id="step5" class="question-box hidden final-message">
+    <p class="question-text" style="font-size:2.2rem;">It's a date</p>
+    <p id="summaryText" style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; line-height:1.8; color:#4a3828;"></p>
+    <div style="font-size:2rem; margin-top:1rem;">✨</div>
+    <p id="sendingStatus" style="font-family:'Montserrat',sans-serif; font-size:0.8rem; color:#8b765a; margin-top:1rem;"></p>
+  </div>
+
+  <button class="next-btn hidden" id="nextButton" type="button">Continue</button>
+</div>
+
+<script>
+  (() => {
+    let currentStep = 0;
+    let selectedFood = null;
+    let selectedDrink = null;
+    let selectedColor = null;
+    let colorConfirmCount = 0;
+    const REQUIRED_COLOR_CONFIRMS = 3;
+    let isSending = false;
+    let colorModeIsOthers = false;
+
+    const hiddenForm = document.getElementById('hiddenForm');
+    const formFood = document.getElementById('formFood');
+    const formDrink = document.getElementById('formDrink');
+    const formColor = document.getElementById('formColor');
+    const formDate = document.getElementById('formDate');
+    const formLocation = document.getElementById('formLocation');
+    const formTimestamp = document.getElementById('formTimestamp');
+
+    const step0 = document.getElementById('step0');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const step4 = document.getElementById('step4');
+    const step5 = document.getElementById('step5');
+    const stepDisplay = document.getElementById('stepDisplay');
+    const nextButton = document.getElementById('nextButton');
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const celebrationDateInput = document.getElementById('celebrationDate');
+    const locationTextInput = document.getElementById('locationTextInput');
+    const summaryText = document.getElementById('summaryText');
+    const dynamicSubtitle = document.getElementById('dynamicSubtitle');
+    const sendingStatus = document.getElementById('sendingStatus');
+    const colorConfirmMessage = document.getElementById('colorConfirmMessage');
+    const customColorContainer = document.getElementById('customColorContainer');
+    const customColorInput = document.getElementById('customColorInput');
+
+    const foodItems = document.querySelectorAll('#foodOptions .option-item');
+    const drinkItems = document.querySelectorAll('#drinkOptions .option-item');
+    const colorItems = document.querySelectorAll('#colorOptions .option-item');
+
+    function showTopNotification(message) {
+      const existing = document.querySelector('.top-notification');
+      if (existing) existing.remove();
+      const notif = document.createElement('div');
+      notif.className = 'top-notification';
+      notif.textContent = message;
+      document.body.appendChild(notif);
+      setTimeout(() => {
+        if (notif.parentNode) notif.remove();
+      }, 2500);
+    }
+
+    function getFinalColor() {
+      if (colorModeIsOthers && customColorInput.value.trim() !== '') {
+        return customColorInput.value.trim();
+      }
+      return selectedColor;
+    }
+
+    function getFinalLocation() {
+      return locationTextInput.value.trim() || 'Not specified';
+    }
+
+    function submitFormData(answers) {
+      if (isSending) return;
+      isSending = true;
+      
+      if (sendingStatus) {
+        sendingStatus.innerHTML = 'Sending your answers<span class="loading-spinner"></span>';
+      }
+
+      formFood.value = answers.food;
+      formDrink.value = answers.drink;
+      formColor.value = answers.color;
+      formDate.value = answers.date;
+      formLocation.value = answers.location;
+      formTimestamp.value = new Date().toLocaleString();
+
+      hiddenForm.submit();
+      
+      if (sendingStatus) {
+        sendingStatus.innerHTML = '✓ Answers sent! Can\'t wait to celebrate with you! 💕';
+      }
+      showTopNotification('✨ Your answers have been saved!');
+      
+      isSending = false;
+    }
+
+    function showStep(step) {
+      step0.classList.add('hidden');
+      step1.classList.add('hidden');
+      step2.classList.add('hidden');
+      step3.classList.add('hidden');
+      step4.classList.add('hidden');
+      step5.classList.add('hidden');
+      nextButton.classList.add('hidden');
+
+      if (step === 0) {
+        step0.classList.remove('hidden');
+        stepDisplay.textContent = 'Step 1 / 5';
+        dynamicSubtitle.textContent = 'for my love';
+      } else if (step === 1) {
+        step1.classList.remove('hidden');
+        stepDisplay.textContent = 'Step 2 / 5 · Food';
+        dynamicSubtitle.textContent = 'feast of joy';
+        nextButton.classList.remove('hidden');
+        updateNextButtonState();
+      } else if (step === 2) {
+        step2.classList.remove('hidden');
+        stepDisplay.textContent = 'Step 3 / 5 · Drink';
+        dynamicSubtitle.textContent = 'refreshment';
+        nextButton.classList.remove('hidden');
+        updateNextButtonState();
+      } else if (step === 3) {
+        step3.classList.remove('hidden');
+        stepDisplay.textContent = 'Step 4 / 5 · Color';
+        dynamicSubtitle.textContent = 'your hue';
+        nextButton.classList.remove('hidden');
+        colorConfirmCount = 0;
+        if (colorConfirmMessage) colorConfirmMessage.textContent = '';
+        if (colorModeIsOthers) {
+          customColorContainer.classList.remove('hidden');
+        } else {
+          customColorContainer.classList.add('hidden');
+        }
+        updateNextButtonState();
+      } else if (step === 4) {
+        step4.classList.remove('hidden');
+        stepDisplay.textContent = 'Step 5 / 5 · Date & Place';
+        dynamicSubtitle.textContent = 'almost ours';
+        nextButton.classList.remove('hidden');
+        updateNextButtonState();
+      } else if (step === 5) {
+        step5.classList.remove('hidden');
+        stepDisplay.textContent = 'Complete';
+        dynamicSubtitle.textContent = 'with all my heart';
+        buildSummary();
+        
+        const answers = {
+          food: selectedFood,
+          drink: selectedDrink,
+          color: getFinalColor(),
+          date: celebrationDateInput.value,
+          location: getFinalLocation()
+        };
+        
+        setTimeout(() => {
+          submitFormData(answers);
+        }, 500);
+      }
+    }
+
+    function updateNextButtonState() {
+      if (currentStep === 1) nextButton.disabled = !selectedFood;
+      else if (currentStep === 2) nextButton.disabled = !selectedDrink;
+      else if (currentStep === 3) {
+        if (colorModeIsOthers) {
+          nextButton.disabled = (customColorInput.value.trim() === '');
+        } else {
+          nextButton.disabled = (selectedColor === null || colorConfirmCount < REQUIRED_COLOR_CONFIRMS);
+        }
+      }
+      else if (currentStep === 4) {
+        const dateOk = !!celebrationDateInput.value;
+        const locOk = locationTextInput.value.trim() !== '';
+        nextButton.disabled = !(dateOk && locOk);
+      }
+    }
+
+    function moveNoButton() {
+      const btn = noButton;
+      const parent = btn.offsetParent;
+      if (!parent) return;
+      const parentRect = parent.getBoundingClientRect();
+      const btnWidth = btn.offsetWidth || 110;
+      const btnHeight = btn.offsetHeight || 45;
+      const maxX = Math.max(0, parentRect.width - btnWidth - 15);
+      const maxY = Math.max(0, parentRect.height - btnHeight - 15);
+      btn.style.position = 'relative';
+      btn.style.left = Math.random() * maxX + 'px';
+      btn.style.top = Math.random() * maxY + 'px';
+    }
+
+    noButton.addEventListener('mouseenter', moveNoButton);
+    noButton.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+    noButton.addEventListener('click', () => alert("You can't say no, darling."));
+
+    yesButton.addEventListener('click', () => {
+      currentStep = 1;
+      showStep(1);
+    });
+
+    foodItems.forEach(item => {
+      item.addEventListener('click', function() {
+        foodItems.forEach(i => i.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedFood = this.getAttribute('data-food');
+        updateNextButtonState();
+      });
+    });
+
+    drinkItems.forEach(item => {
+      item.addEventListener('click', function() {
+        drinkItems.forEach(i => i.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedDrink = this.getAttribute('data-drink');
+        updateNextButtonState();
+      });
+    });
+
+    colorItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const dataColor = this.getAttribute('data-color');
+        
+        if (dataColor === '__others__') {
+          colorItems.forEach(i => i.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedColor = null;
+          colorModeIsOthers = true;
+          colorConfirmCount = 0;
+          customColorContainer.classList.remove('hidden');
+          customColorInput.value = '';
+          if (colorConfirmMessage) colorConfirmMessage.textContent = 'Type your favorite color below ✨';
+          showTopNotification('🎨 Tell us your own unique color!');
+          updateNextButtonState();
+          return;
+        }
+
+        colorModeIsOthers = false;
+        customColorContainer.classList.add('hidden');
+        customColorInput.value = '';
+
+        if (selectedColor === dataColor && colorConfirmCount >= REQUIRED_COLOR_CONFIRMS) {
+          return;
+        }
+
+        if (selectedColor !== dataColor) {
+          colorItems.forEach(i => i.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedColor = dataColor;
+          colorConfirmCount = 1;
+          if (colorConfirmMessage) colorConfirmMessage.textContent = `Are you sure? (1/${REQUIRED_COLOR_CONFIRMS})`;
+          showTopNotification(`🌸 You chose ${dataColor}. Are you sure? (1/${REQUIRED_COLOR_CONFIRMS})`);
+        } else {
+          colorConfirmCount++;
+          if (colorConfirmCount >= REQUIRED_COLOR_CONFIRMS) {
+            if (colorConfirmMessage) colorConfirmMessage.textContent = `✓ ${selectedColor} confirmed!`;
+            showTopNotification(`✨ ${selectedColor} is locked in! Beautiful choice.`);
+            this.classList.add('selected');
+          } else {
+            if (colorConfirmMessage) colorConfirmMessage.textContent = `Are you really sure? (${colorConfirmCount}/${REQUIRED_COLOR_CONFIRMS})`;
+            showTopNotification(`🤔 ${selectedColor} — confirm again (${colorConfirmCount}/${REQUIRED_COLOR_CONFIRMS})`);
+          }
+        }
+        updateNextButtonState();
+      });
+    });
+
+    customColorInput.addEventListener('input', updateNextButtonState);
+    celebrationDateInput.addEventListener('input', updateNextButtonState);
+    locationTextInput.addEventListener('input', updateNextButtonState);
+
+    nextButton.addEventListener('click', () => {
+      if (currentStep === 1 && selectedFood) {
+        currentStep = 2; showStep(2);
+      } else if (currentStep === 2 && selectedDrink) {
+        currentStep = 3; showStep(3);
+      } else if (currentStep === 3) {
+        if (colorModeIsOthers) {
+          if (customColorInput.value.trim() === '') {
+            showTopNotification('🎨 Please type a color name.');
+            return;
+          }
+          currentStep = 4; showStep(4);
+        } else {
+          if (selectedColor && colorConfirmCount >= REQUIRED_COLOR_CONFIRMS) {
+            currentStep = 4; showStep(4);
+          } else {
+            showTopNotification('💬 Please confirm your favorite color by clicking it 3 times.');
+          }
+        }
+      } else if (currentStep === 4) {
+        if (!celebrationDateInput.value) {
+          showTopNotification('📅 Please choose a celebration date.');
+          return;
+        }
+        if (locationTextInput.value.trim() === '') {
+          showTopNotification('📍 Tell us where you want to celebrate!');
+          return;
+        }
+        currentStep = 5; showStep(5);
+      }
+    });
+
+    function buildSummary() {
+      const date = celebrationDateInput.value || '?';
+      const loc = getFinalLocation() || '?';
+      const finalColor = getFinalColor() || '?';
+      summaryText.innerHTML = `
+        <strong>Food:</strong> ${selectedFood}<br>
+        <strong>Drink:</strong> ${selectedDrink}<br>
+        <strong>Favorite Color:</strong> ${finalColor}<br>
+        <strong>Date:</strong> ${date}<br>
+        <strong>Place:</strong> ${loc}
+      `;
+    }
+
+    if (celebrationDateInput) {
+      celebrationDateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+    }
+
+    showStep(0);
+  })();
+</script>
+</body>
+</html>
